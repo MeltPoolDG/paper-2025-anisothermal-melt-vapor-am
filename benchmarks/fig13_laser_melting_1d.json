@@ -1,0 +1,182 @@
+{
+  "profiling": {
+    "enable": "true",
+    "write time step size": "6000"
+  },
+  "base": {
+    "application name": "recoil_pressure",
+    "dimension": "1",
+    "do print parameters": "true",
+    "global refinements": "1",
+    "problem name": "melt_pool",
+    "verbosity level": "3",
+    "fe": {
+      "degree": "1"
+    }
+  },
+  "evaporation": {
+    "interface temperature evaluation type": "interface_value",
+    "evaporative mass flux model": "saturated_vapor_pressure",
+    "formulation source term level set": "interface_velocity_sharp_heavy",
+    "recoil pressure": {
+      "interface distributed flux type": "interface_value",
+      "activation temperature": "3000",
+      "dirac delta function approximation": {
+        "type": "heaviside_phase_weighted",
+        "auto weights": "true"
+      },
+      "enable": "true",
+      "type": "hybrid"
+    },
+    "evaporative cooling": {
+      "enable": "true",
+      "dirac delta function approximation": {
+        "auto weights": "true",
+        "type": "heaviside_phase_weighted"
+      }
+    },
+    "evaporative dilation rate": {
+      "enable": "true"
+    }
+  },
+  "heat": {
+    "predictor": {
+      "type": "linear_extrapolation"
+    },
+    "linear solver": {
+      "preconditioner type": "ILU",
+      "rel tolerance": "1e-4"
+    },
+    "use volume-specific thermal capacity for phase interpolation": "true",
+    "nlsolve": {
+      "max nonlinear iterations": "20",
+      "field correction tolerance": "1e-9",
+      "residual tolerance": "1e5"
+    }
+  },
+  "material": {
+    "material template": "Ti64",
+    "gas": {
+      "density": "4.087",
+      "dynamic viscosity": "1e-6"
+    },
+    "liquid": {
+      "dynamic viscosity": "1e-6"
+    },
+    "two phase fluid properties transition type": "consistent_with_evaporation"
+  },
+  "problem specific": {
+    "do extrapolate coupling terms": "false",
+    "do advect level set": "true",
+    "do heat transfer": "true",
+    "do solidification": "true",
+    "coupling heat evapor": {
+      "n max iter": "1"
+    },
+    "coupling ls evapor": {
+      "n max iter": "1"
+    }
+  },
+  "laser": {
+    "dirac delta function approximation": {
+      "auto weights": "true",
+      "type": "heaviside_phase_weighted"
+    },
+    "model": "interface_projection_regularized",
+    "intensity profile": "Gauss",
+    "power": "156",
+    "absorptivity gas": "0.35",
+    "absorptivity liquid": "0.35",
+    "radius": "70e-6"
+  },
+  "simulation specific domain": {
+    "domain x max": "400e-6",
+    "domain x min": "-400e-6",
+    "domain y max": "300e-6",
+    "domain y min": "-300e-6",
+    "cell repetitions": "2000",
+    "periodic boundary": "true",
+    "evaporation boundary": "true",
+    "outlet pressure": "101325"
+  },
+  "time stepping": {
+    "end time": "1e-3",
+    "start time": "0.0",
+    "time step size": "1e-7"
+  },
+  "output": {
+    "directory": "output_fig13_laser_melting_1d",
+    "write time step size": "1e-6",
+    "paraview": {
+      "enable": "true"
+    }
+  },
+  "level set": {
+    "nearest point": {
+      "type": "nearest_point",
+      "verbosity level": "3"
+    },
+    "reinitialization": {
+      "linear solver": {
+        "preconditioner type": "Diagonal"
+      },
+      "enable": "true",
+      "n initial steps": "0",
+      "max n steps": "5",
+      "interface thickness parameter": {
+        "type": "absolute_value",
+        "val": "1e-6"
+      }
+    },
+    "advection diffusion": {
+      "predictor": {
+        "type": "linear_extrapolation"
+      },
+      "linear solver": {
+        "preconditioner type": "Diagonal",
+        "rel tolerance": "1e-9"
+      }
+    },
+    "do localized heaviside": "true",
+    "fe": {
+      "type": "FE_Q_iso_Q1",
+      "degree": "2"
+    }
+  },
+  "flow": {
+    "adaflo": {
+      "Navier-Stokes": {
+        "Solver": {
+          "NL max iterations": "50",
+          "NL tolerance": "1.e-8",
+          "lin its before inner solvers": "50",
+          "lin max iterations": "50",
+          "lin relative tolerance": "1",
+          "lin tolerance": "1.e-5",
+          "lin pressure preconditioner": "ilu scalar",
+          "lin velocity preconditioner": "ilu",
+          "linearization scheme": "coupled implicit Newton"
+        },
+        "dimension": "2",
+        "formulation convective term momentum balance": "convective",
+        "global refinements": "0",
+        "physical type": "incompressible",
+        "velocity degree": "2"
+      },
+      "Output options": {
+        "output verbosity": "3",
+        "output walltimes": "0",
+        "output memory": "0"
+      },
+      "Time stepping": {
+        "scheme": "bdf_2"
+      }
+    },
+    "gravity": "0.0",
+    "darcy damping": {
+      "avoid div zero constant": "1.",
+      "formulation": "implicit_formulation",
+      "mushy zone morphology": "1e11"
+    }
+  }
+}

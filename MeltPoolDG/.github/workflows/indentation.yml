@@ -1,0 +1,46 @@
+name: Indent
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: DoozyX/clang-format-lint-action@v0.16.2
+      with:
+        source: '.'
+        exclude: ''
+        extensions: 'hpp,cpp,cc'
+        clangFormatVersion: 16
+        inplace: true
+    - name: code-formatting
+      run: |
+        git diff
+        git diff-files --quiet || exit $?
+    - name: json-formatting
+      run: |
+        scripts/format-all-json
+        git diff
+        git diff-files --quiet || exit $?
+    - name: json-check
+      run: |
+        . ./scripts/check-json || exit $?
+    - name: python-formatting
+      id: autopep8
+      uses: peter-evans/autopep8@v1
+      with:
+        args: --recursive --in-place --ignore E501 --exit-code -v -v -v .
+    - name: python-check
+      if: steps.autopep8.outputs.exit-code == 2
+      run: exit 1
+    - name: parameter-sanity-check
+      run: |
+        scripts/parameters/check-all-json
+        git diff
+        git diff-files --quiet || exit $?
+
+

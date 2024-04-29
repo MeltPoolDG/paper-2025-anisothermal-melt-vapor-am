@@ -1,0 +1,92 @@
+| cycle: 0 n_dofs: 65(ls) + 129(vel) + 65(p) T.size 65                           melt_pool_problem |
+| cycle: 1 n_dofs: 71(ls) + 141(vel) + 71(p) T.size 71                           melt_pool_problem |
+| cycle: 2 n_dofs: 83(ls) + 165(vel) + 83(p) T.size 83                           melt_pool_problem |
+| cycle: 3 n_dofs: 107(ls) + 213(vel) + 107(p) T.size 107                        melt_pool_problem |
+| cycle: 4 n_dofs: 107(ls) + 213(vel) + 107(p) T.size 107                        melt_pool_problem |
+POSTPROCESSOR: min velocity: 0 (analytical: 0)
+POSTPROCESSOR: max velocity: 0 (analytical: 0.99)
+POSTPROCESSOR: max pressure: 0 (analytical: 0.0099)
+POSTPROCESSOR: min pressure: 0 (analytical: 0)
++--------------------------------------------------------------------------------------------------+
+|  Time increment # 1      t = 0.0000e+00 to 5.0000e-04 ( dt = 5.0000e-04 )          time_iterator |
++--------------------------------------------------------------------------------------------------+
+| || advected field ||L2 = 9.7990423441e-01                                    advection_diffusion |
++--------------------------------------------------------------------------------------------------+
+|  τ = 0.0005                                                                     reinitialization |
+| || delta phi ||L2 = 4.243974035489373e-05                                       reinitialization |
+|  τ = 0.001                                                                      reinitialization |
+| || delta phi ||L2 = 3.906869096681476e-05                                       reinitialization |
+|  τ = 0.0015                                                                     reinitialization |
+| || delta phi ||L2 = 3.644343814812601e-05                                       reinitialization |
++--------------------------------------------------------------------------------------------------+
+| evaporation: jump in the velocity field = -0.99              evaporation_source_terms_continuous |
+| || evapartive_mass_source ||L2 = 2.1959204615e-01            evaporation_source_terms_continuous |
+| || velocity ||L2 = 6.958959698677063e-01                                    navier_stokes_adaflo |
+| || pressure ||L2 = 8.351587295532227e+00                                    navier_stokes_adaflo |
+POSTPROCESSOR: min velocity: 0 (analytical: 0)
+POSTPROCESSOR: max velocity: 0.99 (analytical: 0.99)
+POSTPROCESSOR: max pressure: 10.3 (analytical: 0.0099)
+POSTPROCESSOR: min pressure: 3.63e-17 (analytical: 0)
++--------------------------------------------------------------------------------------------------+
+|  Time increment # 2      t = 5.0000e-04 to 1.0000e-03 ( dt = 5.0000e-04 )          time_iterator |
++--------------------------------------------------------------------------------------------------+
+| || advected field ||L2 = 9.7989273071e-01                                    advection_diffusion |
++--------------------------------------------------------------------------------------------------+
+|  τ = 0.0005                                                                     reinitialization |
+| || delta phi ||L2 = 3.418596315896139e-05                                       reinitialization |
+|  τ = 0.001                                                                      reinitialization |
+| || delta phi ||L2 = 3.220190410502255e-05                                       reinitialization |
+|  τ = 0.0015                                                                     reinitialization |
+| || delta phi ||L2 = 3.044744880753569e-05                                       reinitialization |
++--------------------------------------------------------------------------------------------------+
+| evaporation: jump in the velocity field = -0.99              evaporation_source_terms_continuous |
+| || evapartive_mass_source ||L2 = 2.1946181546e-01            evaporation_source_terms_continuous |
+| || velocity ||L2 = 6.958947181701660e-01                                    navier_stokes_adaflo |
+| || pressure ||L2 = 4.165543556213379e+00                                    navier_stokes_adaflo |
+POSTPROCESSOR: min velocity: 0 (analytical: 0)
+POSTPROCESSOR: max velocity: 0.99 (analytical: 0.99)
+POSTPROCESSOR: max pressure: -5.16 (analytical: 0.0099)
+POSTPROCESSOR: min pressure: -3.73e-13 (analytical: 0)
++--------------------------------------------------------------------------------------------------+
+|  Time increment # 3      t = 1.0000e-03 to 1.5000e-03 ( dt = 5.0000e-04 )          time_iterator |
++--------------------------------------------------------------------------------------------------+
+| || advected field ||L2 = 9.7988229990e-01                                    advection_diffusion |
++--------------------------------------------------------------------------------------------------+
+|  τ = 0.0005                                                                     reinitialization |
+| || delta phi ||L2 = 2.888894232455641e-05                                       reinitialization |
+|  τ = 0.001                                                                      reinitialization |
+| || delta phi ||L2 = 2.749511440924834e-05                                       reinitialization |
+|  τ = 0.0015                                                                     reinitialization |
+| || delta phi ||L2 = 2.624470653245226e-05                                       reinitialization |
++--------------------------------------------------------------------------------------------------+
+| evaporation: jump in the velocity field = -0.99              evaporation_source_terms_continuous |
+| || evapartive_mass_source ||L2 = 2.1935119753e-01            evaporation_source_terms_continuous |
+| || velocity ||L2 = 6.958941817283630e-01                                    navier_stokes_adaflo |
+| || pressure ||L2 = 7.481392938643694e-03                                    navier_stokes_adaflo |
+POSTPROCESSOR: min velocity: 0 (analytical: 0)
+POSTPROCESSOR: max velocity: 0.99 (analytical: 0.99)
+POSTPROCESSOR: max pressure: 0.0107 (analytical: 0.0099)
+POSTPROCESSOR: min pressure: -3.09e-12 (analytical: 0)
++--------------------------------------------------------------------------------------------------+
+|  Time increment # 4      t = 1.5000e-03 to 2.0000e-03 ( dt = 5.0000e-04 )          time_iterator |
++--------------------------------------------------------------------------------------------------+
+| || advected field ||L2 = 9.7987288237e-01                                    advection_diffusion |
++--------------------------------------------------------------------------------------------------+
+|  τ = 0.0005                                                                     reinitialization |
+| || delta phi ||L2 = 2.511882121325471e-05                                       reinitialization |
+|  τ = 0.001                                                                      reinitialization |
+| || delta phi ||L2 = 2.409771695965901e-05                                       reinitialization |
+|  τ = 0.0015                                                                     reinitialization |
+| || delta phi ||L2 = 2.316818427061662e-05                                       reinitialization |
++--------------------------------------------------------------------------------------------------+
+| evaporation: jump in the velocity field = -0.99              evaporation_source_terms_continuous |
+| || evapartive_mass_source ||L2 = 2.1925553382e-01            evaporation_source_terms_continuous |
+| || velocity ||L2 = 6.958941221237183e-01                                    navier_stokes_adaflo |
+| || pressure ||L2 = 7.449187338352203e-03                                    navier_stokes_adaflo |
+POSTPROCESSOR: min velocity: 0 (analytical: 0)
+POSTPROCESSOR: max velocity: 0.99 (analytical: 0.99)
+POSTPROCESSOR: max pressure: 0.0106 (analytical: 0.0099)
+POSTPROCESSOR: min pressure: -2.18e-13 (analytical: 0)
++--------------------------------------------------------------------------------------------------+
+|  end of simulation                                                                               |
++--------------------------------------------------------------------------------------------------+

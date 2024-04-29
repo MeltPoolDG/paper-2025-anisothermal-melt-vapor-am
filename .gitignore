@@ -1,0 +1,15 @@
+*.aux
+*.eps
+*.bbl
+*.blg
+*.synctex.gz
+*.fls
+*.nav
+*.out
+*.toc
+*.snm
+*.log
+*.loc
+*.soc
+*.gz
+*.spl

@@ -1,0 +1,35 @@
+{
+  "base": {
+    "application name": "reinit_circle",
+    "problem name": "reinitialization",
+    "dimension": "         2",
+    "global refinements": "6",
+    "degree": "            1",
+    "do print parameters": "false"
+  },
+  "adaptive meshing": {
+    "do amr": "true",
+    "upper perc to refine": "     0.3",
+    "lower perc to coarsen": "    0.00",
+    "max grid refinement level": "8"
+  },
+  "time stepping": {
+    "start time": "0.0",
+    "time step size": "0.005",
+    "max n steps": "5"
+  },
+  "reinitialization": {
+    "reinit modeltype": "olsson2007",
+    "reinit do matrix free": "false",
+    "reinit do print l2norm": "true",
+    "reinit constant epsilon": "0.05"
+  },
+  "normal vector": {
+    "normal vec do matrix free": "false"
+  },
+  "output": {
+    "do output": "true",
+    "filename": "solution_test",
+    "directory": "output"
+  }
+}

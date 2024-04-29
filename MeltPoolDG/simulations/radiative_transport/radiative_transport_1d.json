@@ -1,0 +1,38 @@
+{
+  "base": {
+    "problem name": "radiative_transport",
+    "application name": "radiative_transport",
+    "dimension": "1",
+    "global refinements": "5",
+    "do print parameters": "false",
+    "verbosity level": "0",
+    "fe": {
+      "degree": "1"
+    }
+  },
+  "time stepping": {
+    "start time": "0.0",
+    "end time": "20.0",
+    "time step size": "1."
+  },
+  "rte": {
+    "rte verbosity level": "0",
+    "avoid div zero constant": "1e-16",
+    "linear solver": {
+      "solver type": "GMRES",
+      "monitor type": "reduced",
+      "do matrix free": "true",
+      "abs tolerance": "1e-16",
+      "preconditioner type": "ILU"
+    }
+  },
+  "simulation specific parameters": {
+    "power": "0.1"
+  },
+  "output": {
+    "paraview": {
+      "output subdomains": "true",
+      "enable": "true"
+    }
+  }
+}

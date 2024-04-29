@@ -1,0 +1,181 @@
+{
+  "profiling": {
+    "enable": "true",
+    "write time step size": "3600"
+  },
+  "adaptive meshing": {
+    "do amr": "true",
+    "do not modify boundary cells": "false",
+    "every n step": "10",
+    "lower perc to coarsen": "0.15",
+    "max grid refinement level": "5",
+    "n initial refinement cycles": "4",
+    "upper perc to refine": "0.15"
+  },
+  "base": {
+    "application name": "film_boiling",
+    "dimension": "3",
+    "do print parameters": "true",
+    "global refinements": "2",
+    "problem name": "melt_pool",
+    "verbosity level": "3",
+    "fe": {
+      "degree": "1"
+    }
+  },
+  "evaporation": {
+    "interface temperature evaluation type": "local_value",
+    "formulation source term level set": "interface_velocity_local",
+    "evaporative mass flux model": "hardt_wondra",
+    "hardt wondra": {
+      "coefficient": "1.0"
+    },
+    "evaporative cooling": {
+      "enable": "true",
+      "dirac delta function approximation": {
+        "auto weights": "true",
+        "type": "heaviside_phase_weighted"
+      }
+    },
+    "evaporative dilation rate": {
+      "enable": "true"
+    }
+  },
+  "heat": {
+    "linear solver": {
+      "preconditioner type": "Diagonal",
+      "rel tolerance": "1e-4"
+    },
+    "use volume-specific thermal capacity for phase interpolation": "true",
+    "nlsolve": {
+      "field correction tolerance": "1e-10",
+      "residual tolerance": "1e-6"
+    }
+  },
+  "material": {
+    "gas": {
+      "thermal conductivity": "1",
+      "specific heat capacity": "200",
+      "density": "5",
+      "dynamic viscosity": "0.005"
+    },
+    "liquid": {
+      "thermal conductivity": "8000",
+      "specific heat capacity": "400",
+      "density": "200",
+      "dynamic viscosity": "0.1"
+    },
+    "boiling temperature": "500.",
+    "latent heat of evaporation": "1.e4",
+    "molar mass": "0.01801528",
+    "two phase fluid properties transition type": "consistent_with_evaporation"
+  },
+  "problem specific": {
+    "do heat transfer": "true",
+    "amr": {
+      "strategy": "generic",
+      "do refine all interface cells": "true",
+      "do auto detect frequency": "true",
+      "automatic grid refinement type": "fixed_fraction"
+    }
+  },
+  "simulation specific": {
+    "factor height": "2",
+    "bc vertical faces": "symmetry",
+    "bc temperature top": "dirichlet",
+    "disturbance factors": "0.03125:0.0078125"
+  },
+  "time stepping": {
+    "end time": "3.0",
+    "start time": "0.0",
+    "time step size": "0.0002"
+  },
+  "output": {
+    "directory": "output_fig6+7_film_boiling_3d",
+    "write time step size": "0.02",
+    "output variables": "temperature,heaviside,velocity,pressure,evaporative_mass_flux,interface_velocity",
+    "do user defined postprocessing": "false",
+    "paraview": {
+      "enable": "true"
+    }
+  },
+  "level set": {
+    "reinitialization": {
+      "linear solver": {
+        "preconditioner type": "ILU",
+        "abs tolerance": "1e-16",
+        "rel tolerance": "1e-9"
+      },
+      "enable": "true",
+      "n initial steps": "0",
+      "max n steps": "2",
+      "interface thickness parameter": {
+        "type": "absolute_value",
+        "val": "5e-4"
+      }
+    },
+    "advection diffusion": {
+      "linear solver": {
+        "preconditioner type": "ILU"
+      },
+      "predictor": {
+        "type": "linear_extrapolation"
+      }
+    },
+    "curvature": {
+      "linear solver": {
+        "preconditioner type": "ILU"
+      },
+      "filter parameter": "2"
+    },
+    "nearest point": {
+      "type": "nearest_point",
+      "verbosity level": "3"
+    },
+    "normal vector": {
+      "linear solver": {
+        "preconditioner type": "ILU"
+      },
+      "filter parameter": "2"
+    },
+    "fe": {
+      "degree": "2",
+      "type": "FE_Q_iso_Q1"
+    }
+  },
+  "flow": {
+    "adaflo": {
+      "Navier-Stokes": {
+        "Solver": {
+          "NL max iterations": "30",
+          "NL tolerance": "1.e-9",
+          "lin its before inner solvers": "50",
+          "lin max iterations": "30",
+          "lin tolerance": "1.e-6",
+          "lin relative tolerance": "1",
+          "lin velocity preconditioner": "ilu",
+          "linearization scheme": "coupled implicit Newton"
+        },
+        "formulation convective term momentum balance": "convective",
+        "global refinements": "0",
+        "physical type": "incompressible",
+        "velocity degree": "2"
+      },
+      "Output options": {
+        "output verbosity": "3",
+        "output walltimes": "0"
+      },
+      "Time stepping": {
+        "scheme": "bdf_2"
+      }
+    },
+    "gravity": "9.81",
+    "surface tension": {
+      "surface tension coefficient": "0.1",
+      "dirac delta function approximation": {
+        "auto weights": "true",
+        "type": "reciprocal_phase_weighted"
+      }
+    }
+  }
+}

@@ -1,0 +1,105 @@
+Bootstrap: docker
+From: ubuntu:22.04
+
+%setup
+    # directory of the external libraries
+    singularity_folder_libs=$SINGULARITY_ROOTFS/external_libs
+    mkdir $singularity_folder_libs
+
+    # recommended directories for HPC
+    mkdir $SINGULARITY_ROOTFS/scratch
+    mkdir $SINGULARITY_ROOTFS/data
+
+%environment
+    export LC_ALL=C
+    export OMP_NUM_THREADS=1
+    export OPENBLAS_NUM_THREADS=1
+
+%post
+    #--------------------------------------
+    #    number of parallel jobs
+    #--------------------------------------
+    if [ -z "${MAKE_JOBS}" ]; then
+        MAKE_JOBS=1
+        echo "Using ${MAKE_JOBS} make jobs"
+        echo "Set \$SINGULARITYENV_MAKE_JOBS to determine the number of make jobs"
+    else
+        echo "Using ${MAKE_JOBS} make jobs"
+    fi
+    #--------------------------------------
+    #    delete cache files
+    #--------------------------------------   
+    if [ "${DELETE_CACHE}" = "true" ];
+    then
+        echo "Cache files will be deleted to reduce container size"
+    else
+        echo "Cache files will NOT be deleted. Set \$SINGULARITYENV_DELETE_CACHE to true to delete them." 
+    fi
+    #--------------------------------------
+    # setup system
+    #--------------------------------------
+    set -ex
+    apt update
+    
+    # to avoid user interaction in selecting time:
+    DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
+    apt-get -y upgrade
+    apt --yes install cmake git vim libopenmpi-dev g++ gfortran libopenblas-base libopenblas-dev python2.7
+    
+    apt-get -y install apt-utils apt-file less make wget openssh-client
+    apt-get -y install openmpi-bin  infiniband-diags ibverbs-utils libibverbs-dev
+    apt-get -y install libipathverbs1 libmlx4-1 libmlx5-1 libmthca1
+    
+    # added for MeltPoolDG
+    apt-get -y install libhdf5-dev libhdf5-openmpi-dev
+    apt-get -y install libscalapack-openmpi-dev 
+    apt-get -y install libparmetis-dev libparmetis4.0
+    apt-get -y install libmetis-dev libmetis5
+    apt-get -y install libboost-all-dev
+    apt-get -y install numdiff
+
+    #--------------------------------------
+    # install openMPI 4.0.3
+    #--------------------------------------
+    apt-get -y install libopenmpi-dev
+    mpiexec --version
+
+    #--------------------------------------
+    # install MeltPoolDG
+    #--------------------------------------
+    git clone https://github.com/MeltPoolDG/MeltPoolDG-dev
+    mpDir=$pwd/MeltPoolDG-dev
+    echo "Install MeltPoolDG into $mpDir"
+
+    # install dependencies
+    depDir=$mpDir/../external_libs
+    echo "Install dependencies into $depDir"
+    mkdir -p $depDir
+    cd $depDir
+    ls -l
+    bash $mpDir/scripts/config/download_and_install_dependencies.sh ${MAKE_JOBS} || exit 1
+     
+    dealii_dir=$depDir/dealii-build
+    adaflo_include=$depDir/adaflo/include
+    adaflo_dir=$depDir/adaflo/build_release
+    
+    cd $mpDir
+    mkdir -p build_release
+    cd build_release
+    bash $mpDir/scripts/config/install_meltpooldg.sh  ${MAKE_JOBS} $dealii_dir $adaflo_include $adaflo_dir
+    # make a symbolic link --> @todo: this should be replaced by make install
+    ln -s $mpDir/build_release/meltpooldg /usr/bin/meltpooldg
+
+    #--------------------------------------
+    # delete files to reduce container size
+    #-------------------------------------- 
+    if [ "${DELETE_CACHE}" = "true" ];
+    then
+    	cd $depDir
+        echo "Deleting dealii source files"
+        rm -r dealii/* || true
+        echo "Deleting trilinos source files"
+        rm -r Trilinos-trilinos-release-*/* || true
+        echo "Deleting p4est source files"
+        rm -r p4est-2.2* || true
+    fi

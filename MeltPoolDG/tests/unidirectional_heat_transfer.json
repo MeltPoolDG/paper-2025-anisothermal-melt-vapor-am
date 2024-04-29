@@ -1,0 +1,41 @@
+{
+  "base": {
+    "application name": "unidirectional_heat_transfer",
+    "dimension": "2",
+    "do print parameters": "false",
+    "global refinements": "5",
+    "problem name": "heat_transfer",
+    "fe": {
+      "degree": "1"
+    }
+  },
+  "time stepping": {
+    "start time": "0.0",
+    "time step size": "0.0001",
+    "end time": "1.0",
+    "max n steps": "5"
+  },
+  "heat": {
+    "linear solver": {
+      "rel tolerance": "1e-12"
+    },
+    "nlsolve": {
+      "residual tolerance": "5e-9"
+    },
+    "convective boundary condition": {
+      "temperature infinity": "300.0"
+    }
+  },
+  "material": {
+    "gas": {
+      "thermal conductivity": "1.0",
+      "specific heat capacity": "1.0",
+      "density": "1.0"
+    }
+  },
+  "output": {
+    "paraview": {
+      "enable": "false"
+    }
+  }
+}
