@@ -11,12 +11,8 @@ journal = {Computer Methods in Applied Mechanics and Engineering},
 volume = {442},
 pages = {117985},
 year = {2025},
-issn = {0045-7825},
 doi = {https://doi.org/10.1016/j.cma.2025.117985},
-url = {https://www.sciencedirect.com/science/article/pii/S0045782525002579},
-author = {Magdalena Schreter-Fleischhacker and Nils Much and Peter Munch and Martin Kronbichler and Wolfgang A. Wall and Christoph Meier},
-keywords = {Anisothermal evaporating two-phase flow, Diffuse level-set framework, Adaptive finite element method, Melt–vapor interaction, Laser-based powder bed fusion, Metal additive manufacturing},
-abstract = {Metal additive manufacturing via laser-based powder bed fusion (PBF-LB/M) faces performance-critical challenges due to complex melt pool and vapor dynamics, often oversimplified by computational models that neglect crucial aspects, such as vapor jet formation. To address this limitation, we propose a consistent computational multi-physics mesoscale model to study melt pool dynamics, laser-induced evaporation, and vapor flow. In addition to the evaporation-induced pressure jump, we also resolve the evaporation-induced volume expansion and the resulting velocity jump at the liquid–vapor interface. We use an anisothermal incompressible Navier–Stokes solver extended by a conservative diffuse level-set framework and integrate it into a matrix-free adaptive finite element framework. To ensure accurate physical solutions despite extreme density, pressure and velocity gradients across the diffuse liquid–vapor interface, we employ consistent interface source term formulations developed in our previous work. These formulations consider projection operations to extend solution variables from the sharp liquid–vapor interface into the computational domain. Benchmark examples, including film boiling, confirm the accuracy and versatility of the model. As a key result, we demonstrate the model’s ability to capture the strong coupling between melt and vapor flow dynamics in PBF-LB/M based on simulations of stationary laser illumination on a metal plate. Additionally, we show the derivation of the well-known Anisimov model and extend it to a new hybrid model. This hybrid model, together with consistent interface source term formulations, especially for the level-set transport velocity, enables PBF-LB/M simulations that combine accurate physical results with the robustness of an incompressible, diffuse-interface computational modeling framework.}
+author = {Magdalena Schreter-Fleischhacker and Nils Much and Peter Munch and Martin Kronbichler and Wolfgang A. Wall and Christoph Meier}
 }
 ```
 
